@@ -1,4 +1,5 @@
 from unittest import TestCase as UnitTestCase
+from django.core import mail
 from django.test import TestCase
 
 
@@ -21,18 +22,46 @@ class IndexViewTestCase(TestCase):
         resp = self.client.get('/contact/')
         self.assertTrue(isinstance(resp.context['form'], ContactForm))
 
-    def test_returns_success_on_valid_form_submit(self):
-        resp = self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'text': 'This is my message.'
-            })
-        self.assertTrue(resp.context['success'])
-
 
 class ContactFormTestCase(TestCase):
     urls = 'contact_form.tests.urls'
 
-    def test_has_mandatory_email_field(self):
-        form = ContactForm({})
-        self.assertTrue(form.errors.has_key('email'))
+    def test_returns_true_success_on_valid_form_submit(self):
+        resp = self.client.post('/contact/', {
+            'name': 'tobias',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': 'This is my message.'
+            })
+        self.assertTrue(resp.context['success'])
+
+    def test_returns_false_success_on_invalid_email(self):
+        resp = self.client.post('/contact/', {
+            'name': '',
+            'email': 'tobias.lorenzbitmazkcom',
+            'message': 'This is my message.'
+            })
+        self.assertFalse(resp.context['success'])
+
+    def test_returns_false_success_on_empty_mandatory_email(self):
+        resp = self.client.post('/contact/', {
+            'name': '',
+            'email': '',
+            'message': 'This is my message.'
+            })
+        self.assertFalse(resp.context['success'])
+
+    def test_returns_false_success_on_empty_mandatory_text(self):
+        resp = self.client.post('/contact/', {
+            'name': '',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': ''
+            })
+        self.assertFalse(resp.context['success'])
+
+    def test_send_mail_to_dummy_outbox(self):
+        resp = self.client.post('/contact/', {
+            'name': 'tobias',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': 'This is my message.'
+            })
+        self.assertEqual(mail.outbox[0].from_email, 'from@example.com')

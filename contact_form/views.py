@@ -5,12 +5,16 @@ from django.views.generic.list_detail import object_list
 
 from forms import ContactForm
 
-def index(request, template_name='contact_form/contact_form.html'):
+def index(request,
+          template_name='contact_form/contact_form.html'):
     success = False
     if request.POST:
         form = ContactForm(request.POST)
         if form.is_valid():
             success = True
+            form.save(fail_silently=False)
+            form = ContactForm()
+            return redirect('contact_successful')
     else:
         form = ContactForm()
     return render_to_response(template_name,
