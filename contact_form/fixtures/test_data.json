@@ -1,0 +1,16 @@
+[
+  {
+    "pk": 1,
+    "model": "contact_form.example",
+    "fields": {
+      "text": "Lorem ipsum..."
+    }
+  },
+  {
+    "pk": 2,
+    "model": "contact_form.example",
+    "fields": {
+      "text": "Foo bar..."
+    }
+  }
+]
