@@ -65,3 +65,11 @@ class ContactFormTestCase(TestCase):
             'message': 'This is my message.'
             })
         self.assertEqual(mail.outbox[0].from_email, 'from@example.com')
+
+    def test_gets_subject_from_template(self):
+        resp = self.client.post('/contact/', {
+            'name': 'tobias',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': 'This is my message.'
+            })
+        self.assertTrue('Contact form sent' in mail.outbox[0].subject)
