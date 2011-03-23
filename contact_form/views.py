@@ -6,15 +6,16 @@ from django.views.generic.list_detail import object_list
 from forms import ContactForm
 
 def index(request,
-          template_name='contact_form/contact_form.html'):
+          template_name='contact_form/contact_form.html',
+          form=ContactForm,
+          fail_silently=False):
     success = False
     if request.POST:
-        form = ContactForm(request.POST)
+        form = form(data=request.POST, files=request.FILES, request=request)
         if form.is_valid():
             success = True
             form.save(fail_silently=False)
-            form = ContactForm()
     else:
-        form = ContactForm()
+        form = form(request=request)
     return render_to_response(template_name,
                               {'success': success, 'form': form})
