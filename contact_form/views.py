@@ -14,7 +14,6 @@ def index(request,
             success = True
             form.save(fail_silently=False)
             form = ContactForm()
-            return redirect('contact_successful')
     else:
         form = ContactForm()
     return render_to_response(template_name,
