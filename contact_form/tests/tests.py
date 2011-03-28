@@ -34,7 +34,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
-            })
+        })
         self.assertTrue(resp.context['success'])
 
     def test_returns_false_success_on_invalid_email(self):
@@ -42,7 +42,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': '',
             'email': 'tobias.lorenzbitmazkcom',
             'message': 'This is my message.'
-            })
+        })
         self.assertFalse(resp.context['success'])
 
     def test_returns_false_success_on_empty_mandatory_email(self):
@@ -50,7 +50,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': '',
             'email': '',
             'message': 'This is my message.'
-            })
+        })
         self.assertFalse(resp.context['success'])
 
     def test_returns_false_success_on_empty_mandatory_text(self):
@@ -58,7 +58,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': '',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': ''
-            })
+        })
         self.assertFalse(resp.context['success'])
 
     def test_get_current_site_returns_current_site(self):
@@ -67,21 +67,19 @@ class ContactFormTestCase(DjangoTestCase):
             'name': '',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': ''
-            })
+        })
         form = ContactForm(data={}, request=request)
         self.assertIsInstance(form.get_current_site(), RequestSite)
 
-    def test_get_context_returns_unseful_context(self):
+    def test_get_context_returns_useful_context(self):
         rf = RequestFactory()
         request = rf.post('/contact/', {
             'name': '',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': ''
-            })
+        })
         form = ContactBaseForm(data={}, request=request)
         self.assertIsInstance(form.get_context(), RequestContext)
-
-#Placeholder for template_name() function tests, if you are using such ones
 
     def test_subject_returns_subject_from_template(self):
         rf = RequestFactory()
@@ -89,7 +87,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': '',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': ''
-            })
+        })
         form = ContactBaseForm(data={}, request=request)
         self.assertTrue('Contact form sent' in form.subject())
 
@@ -98,7 +96,7 @@ class ContactFormTestCase(DjangoTestCase):
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
-            })
+        })
         self.assertEqual(len(mail.outbox), 1)
 
     def test_gets_subject_from_template(self):
@@ -106,5 +104,13 @@ class ContactFormTestCase(DjangoTestCase):
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
-            })
+        })
         self.assertTrue('Contact form sent' in mail.outbox[0].subject)
+
+    def test_getst_body_from_template(self):
+        resp = self.client.post('/contact/', {
+            'name': 'tobias',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': 'This is my message.'
+        })
+        self.assertTrue('Name:' in mail.outbox[0].body)
