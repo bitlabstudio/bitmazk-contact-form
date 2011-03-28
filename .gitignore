@@ -1,5 +1,6 @@
 *.pyc
+*.wpr
 build/
 dist/
-myapp.egg-info/
+contact_form.egg-info/
 
