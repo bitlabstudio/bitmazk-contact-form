@@ -107,7 +107,7 @@ class ContactFormTestCase(DjangoTestCase):
         })
         self.assertTrue('Contact form sent' in mail.outbox[0].subject)
 
-    def test_getst_body_from_template(self):
+    def test_gets_body_from_template(self):
         resp = self.client.post('/contact/', {
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',

@@ -67,7 +67,6 @@ class ContactBaseForm(forms.Form):
         return RequestSite(self.request)
 
     def save(self, fail_silently=False):
-        """Sends the form via email."""
         send_mail(fail_silently=fail_silently, **self.get_message_dict())
 
 

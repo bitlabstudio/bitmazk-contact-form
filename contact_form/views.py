@@ -1,23 +1,26 @@
 """Views for bitmazk-contact-form application."""
 
-from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render_to_response, redirect
-from django.views.generic.list_detail import object_list
+from django.views.generic import FormView
 
 from forms import ContactForm
 
 
-def index(request,
-          template_name='contact_form/contact_form.html',
-          form=ContactForm,
-          fail_silently=False):
-    success = False
-    if request.POST:
-        form = form(data=request.POST, files=request.FILES, request=request)
-        if form.is_valid():
-            success = True
-            form.save(fail_silently=False)
-    else:
-        form = form(request=request)
-    return render_to_response(template_name,
-                              {'success': success, 'form': form})
+class ContactFormView(FormView):
+    """View class for the ``contact_form.ContactForm`` Form."""
+    form_class = ContactForm
+    template_name = 'contact_form/contact_form.html'
+
+    def form_valid(self, form):
+        form.save()
+        return self.render_to_response(self.get_context_data(
+            form=form, success=True))
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(
+            form=form, success=False))
+
+    def get_success_url(self):
+        pass
+
+    def get_form(self, form_class):
+        return form_class(request=self.request, **self.get_form_kwargs())

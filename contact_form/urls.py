@@ -1,15 +1,10 @@
 """URLs for bitmazk-contact-form application."""
 
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls.defaults import patterns, url
 
-from contact_form.forms import ContactForm
+from contact_form.views import ContactFormView
 
 
 urlpatterns = patterns('contact_form.views',
-    url(r'^$',
-        view='index',
-        kwargs={'form': ContactForm},
-        name='contact_form'
-    ),
+    url(r'^$', view=ContactFormView.as_view(), name='contact_form'),
 )
