@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     author='Tobias Lorenz',
     author_email='tobias.lorenz@bitmazk.com',
-    url="the_url",
+    url="https://github.com/bitmazk/bitmazk-contact-form",
     include_package_data=True,
     test_suite='contact_form.tests.runtests.runtests',
 )

@@ -1,9 +1,11 @@
+"""Views for bitmazk-contact-form application."""
+
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.views.generic.list_detail import object_list
 
+from forms import ContactForm
 
-from forms import ContactForm, AkismetContactForm
 
 def index(request,
           template_name='contact_form/contact_form.html',
