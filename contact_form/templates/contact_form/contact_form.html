@@ -1,6 +1,8 @@
 {% extends "contact_form.html" %}
-{% load i18n %}
 {% block contact_form %}
+  {% if success %}
+    {% include "contact_form/contact_form_success.html" %}
+  {% endif %}
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

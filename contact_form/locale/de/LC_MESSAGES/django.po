@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-29 13:36+0800\n"
+"POT-Creation-Date: 2011-03-29 14:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,3 +49,8 @@ msgstr "E-Mail"
 #: forms.py:85
 msgid "Message"
 msgstr "Nachricht"
+
+#: templates/contact_form/contact_form_success.html:2
+msgid ""
+"Your request has been successfully submitted. Many thanks for your interest!"
+msgstr "Ihre Anfrage wurde erfolgreich übermittelt. Vielen Dank für ihr Interesse!"
