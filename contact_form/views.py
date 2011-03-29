@@ -12,6 +12,7 @@ class ContactFormView(FormView):
 
     def form_valid(self, form):
         form.save()
+        form = self.form_class(request=self.request)
         return self.render_to_response(self.get_context_data(
             form=form, success=True))
 

@@ -1,8 +1,10 @@
+"""Unittests for bitmazk-contact-form application."""
+
 from unittest import TestCase
 from django.core import mail
 from django.test import TestCase as DjangoTestCase
 from django.template import RequestContext
-from django.contrib.sites.models import Site, RequestSite
+from django.contrib.sites.models import RequestSite
 
 
 from contact_form.tests.utils import RequestFactory
@@ -10,11 +12,13 @@ from contact_form.forms import ContactForm, ContactBaseForm
 
 
 class TestSuiteTestCase(TestCase):
+    """Test case making sure that test suite setup works properly."""
     def test_test_suite_can_be_run(self):
         self.assertTrue(True)
 
 
 class IndexViewTestCase(DjangoTestCase):
+    """Test case for tests related to IndexView view class."""
     urls = 'contact_form.tests.urls'
 
     def test_example_view_is_callable(self):
@@ -27,6 +31,7 @@ class IndexViewTestCase(DjangoTestCase):
 
 
 class ContactFormTestCase(DjangoTestCase):
+    """Test case for ContactForm form class."""
     urls = 'contact_form.tests.urls'
 
     def test_returns_true_success_on_valid_form_submit(self):
@@ -92,7 +97,7 @@ class ContactFormTestCase(DjangoTestCase):
         self.assertTrue('Contact form sent' in form.subject())
 
     def test_send_mail_to_dummy_outbox(self):
-        resp = self.client.post('/contact/', {
+        self.client.post('/contact/', {
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
@@ -100,7 +105,7 @@ class ContactFormTestCase(DjangoTestCase):
         self.assertEqual(len(mail.outbox), 1)
 
     def test_gets_subject_from_template(self):
-        resp = self.client.post('/contact/', {
+        self.client.post('/contact/', {
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
@@ -108,7 +113,7 @@ class ContactFormTestCase(DjangoTestCase):
         self.assertTrue('Contact form sent' in mail.outbox[0].subject)
 
     def test_gets_body_from_template(self):
-        resp = self.client.post('/contact/', {
+        self.client.post('/contact/', {
             'name': 'tobias',
             'email': 'tobias.lorenz@bitmazk.com',
             'message': 'This is my message.'
@@ -118,3 +123,11 @@ class ContactFormTestCase(DjangoTestCase):
     def test_returns_submit_button_value_to_template(self):
         resp = self.client.get('/contact/')
         self.assertEqual(resp.context['form'].submit_button_value, 'Submit')
+
+    def test_returns_empty_form_after_valid_submit(self):
+        resp = self.client.post('/contact/', {
+            'name': 'tobias',
+            'email': 'tobias.lorenz@bitmazk.com',
+            'message': 'This is my message.'
+        })
+        self.assertEqual(resp.context['form'].data, {})
