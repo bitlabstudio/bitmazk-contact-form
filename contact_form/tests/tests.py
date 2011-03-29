@@ -4,10 +4,13 @@ from unittest import TestCase
 from django.core import mail
 from django.test import TestCase as DjangoTestCase
 from django.template import RequestContext
+from django.test import RequestFactory
 from django.contrib.sites.models import RequestSite
 
 
-from contact_form.tests.utils import RequestFactory
+from contact_form.tests.utils import (
+    get_form_response,
+)
 from contact_form.forms import ContactForm, ContactBaseForm
 
 
@@ -35,35 +38,19 @@ class ContactFormTestCase(DjangoTestCase):
     urls = 'contact_form.tests.urls'
 
     def test_returns_true_success_on_valid_form_submit(self):
-        resp = self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': 'This is my message.'
-        })
+        resp = get_form_response(self.client)
         self.assertTrue(resp.context['success'])
 
     def test_returns_false_success_on_invalid_email(self):
-        resp = self.client.post('/contact/', {
-            'name': '',
-            'email': 'tobias.lorenzbitmazkcom',
-            'message': 'This is my message.'
-        })
+        resp = get_form_response(self.client, {'email': 'foo@barcom'})
         self.assertFalse(resp.context['success'])
 
     def test_returns_false_success_on_empty_mandatory_email(self):
-        resp = self.client.post('/contact/', {
-            'name': '',
-            'email': '',
-            'message': 'This is my message.'
-        })
+        resp = get_form_response(self.client, {'email': ''})
         self.assertFalse(resp.context['success'])
 
     def test_returns_false_success_on_empty_mandatory_text(self):
-        resp = self.client.post('/contact/', {
-            'name': '',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': ''
-        })
+        resp = get_form_response(self.client, {'message': ''})
         self.assertFalse(resp.context['success'])
 
     def test_get_current_site_returns_current_site(self):
@@ -97,27 +84,15 @@ class ContactFormTestCase(DjangoTestCase):
         self.assertTrue('Contact form sent' in form.subject())
 
     def test_send_mail_to_dummy_outbox(self):
-        self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': 'This is my message.'
-        })
+        get_form_response(self.client)
         self.assertEqual(len(mail.outbox), 1)
 
     def test_gets_subject_from_template(self):
-        self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': 'This is my message.'
-        })
+        get_form_response(self.client)
         self.assertTrue('Contact form sent' in mail.outbox[0].subject)
 
     def test_gets_body_from_template(self):
-        self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': 'This is my message.'
-        })
+        get_form_response(self.client)
         self.assertTrue('Name:' in mail.outbox[0].body)
 
     def test_returns_submit_button_value_to_template(self):
@@ -125,9 +100,5 @@ class ContactFormTestCase(DjangoTestCase):
         self.assertEqual(resp.context['form'].submit_button_value, 'Submit')
 
     def test_returns_empty_form_after_valid_submit(self):
-        resp = self.client.post('/contact/', {
-            'name': 'tobias',
-            'email': 'tobias.lorenz@bitmazk.com',
-            'message': 'This is my message.'
-        })
+        resp = get_form_response(self.client)
         self.assertEqual(resp.context['form'].data, {})
