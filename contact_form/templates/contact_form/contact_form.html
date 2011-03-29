@@ -1,1 +1,9 @@
-{{ form.as_p }}
+{% extends "contact_form.html" %}
+{% load i18n %}
+{% block contact_form %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{{ form.submit_button_value }}">
+  </form>
+{% endblock %}

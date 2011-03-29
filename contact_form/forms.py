@@ -2,16 +2,17 @@
 
 from django import forms
 from django.conf import settings
+from django.contrib.sites.models import Site, RequestSite
 from django.core.mail import send_mail
 from django.template import loader, RequestContext
-from django.contrib.sites.models import Site, RequestSite
+from django.utils.translation import ugettext_lazy as _
 
 
 class ContactBaseForm(forms.Form):
     """Base class for contact forms."""
     def __init__(self, data=None, files=None, request=None, *args, **kwargs):
         if request is None:
-            raise TypeError("Keyword argument 'request' must be supplied")
+            raise TypeError(_('Keyword argument "request" must be supplied'))
         super(ContactBaseForm, self).__init__(data=data, files=files, *args,
                                               **kwargs)
         self.request = request
@@ -20,6 +21,7 @@ class ContactBaseForm(forms.Form):
     recipient_list = [mail_tuple[1] for mail_tuple in settings.MANAGERS]
     subject_template_name = 'contact_form/contact_form_subject.txt'
     template_name = 'contact_form/contact_form.txt'
+    submit_button_value = _('Submit')
 
     def message(self):
         """Returns the email message based on the email template."""
@@ -44,7 +46,7 @@ class ContactBaseForm(forms.Form):
         """Returns a RequestContext, adds cleaned_data and the current Site to the context."""
         if not self.is_valid():
             raise ValueError(
-                'Cannot generate Context from invalid contact form')
+                _('Cannot generate Context from invalid contact form'))
         return RequestContext(self.request,
                               dict(self.cleaned_data,
                                    site=self.get_current_site()))
@@ -52,7 +54,8 @@ class ContactBaseForm(forms.Form):
     def get_message_dict(self):
         """Returns a message dict. Should be consumed by ``django.core.mail.send_mail()``."""
         if not self.is_valid():
-            raise ValueError("Message cannot be sent from invalid contact form")
+            raise ValueError(
+                _('Message cannot be sent from invalid contact form'))
         message_dict = {}
         for message_part in ('from_email', 'message', 'recipient_list',
                              'subject'):
@@ -73,11 +76,11 @@ class ContactBaseForm(forms.Form):
 class ContactForm(ContactBaseForm):
     """A typical contact form."""
     name = forms.CharField(
-        label='Name', max_length=255, required=False)
+        label=_('Name'), max_length=255, required=False)
     email = forms.EmailField(
-        label='Email', required=True)
+        label=_('Email'), required=True)
     message = forms.CharField(
         max_length=5000,
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
-        label='Message',
+        label=_('Message'),
         required=True)

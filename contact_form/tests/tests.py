@@ -114,3 +114,7 @@ class ContactFormTestCase(DjangoTestCase):
             'message': 'This is my message.'
         })
         self.assertTrue('Name:' in mail.outbox[0].body)
+
+    def test_returns_submit_button_value_to_template(self):
+        resp = self.client.get('/contact/')
+        self.assertEqual(resp.context['form'].submit_button_value, 'Submit')
