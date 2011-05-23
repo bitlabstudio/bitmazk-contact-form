@@ -78,6 +78,12 @@ class ContactBaseForm(forms.Form):
 
 class ContactForm(ContactBaseForm):
     """A typical contact form."""
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        if settings.ENABLE_CAPTCHA:
+            self.fields['captcha'] = CaptchaField()
+
     name = forms.CharField(
         label=_('Name'), max_length=255, required=False)
     email = forms.EmailField(
@@ -87,14 +93,13 @@ class ContactForm(ContactBaseForm):
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
         label=_('Message'),
         required=True)
-    captcha = CaptchaField()
-       
+
 
 def home(request):
     if request.POST:
         form = CaptchaTestForm(request.POST)
 
-        # Validate the form: the captcha field will automatically 
+        # Validate the form: the captcha field will automatically
         # check the input
         if form.is_valid():
             human = True

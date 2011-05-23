@@ -50,4 +50,6 @@ Installation
 Configuration
 =============
 
+Set ``ENABLE_CAPTCHA=True`` if you want to show an image captcha.
+
 TODO: Describe email settings for settings.py

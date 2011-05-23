@@ -35,12 +35,11 @@ class IndexViewTestCase(DjangoTestCase):
 
 class ContactFormTestCase(DjangoTestCase):
     """Test case for ContactForm form class."""
-    #to test commented out tests simply disable the captcha functionality by removing the captcha field from forms.py
     urls = 'contact_form.tests.urls'
 
-#    def test_returns_true_success_on_valid_form_submit(self):
-#        resp = get_form_response(self.client)
-#        self.assertTrue(resp.context['success'])
+    def test_returns_true_success_on_valid_form_submit(self):
+        resp = get_form_response(self.client)
+        self.assertTrue(resp.context['success'])
 
     def test_returns_false_success_on_invalid_email(self):
         resp = get_form_response(self.client, {'email': 'foo@barcom'})
@@ -84,22 +83,22 @@ class ContactFormTestCase(DjangoTestCase):
         form = ContactBaseForm(data={}, request=request)
         self.assertTrue('Contact form sent' in form.subject())
 
-#    def test_send_mail_to_dummy_outbox(self):
-#        get_form_response(self.client)
-#        self.assertEqual(len(mail.outbox), 1)
+    def test_send_mail_to_dummy_outbox(self):
+        get_form_response(self.client)
+        self.assertEqual(len(mail.outbox), 1)
 
-#    def test_gets_subject_from_template(self):
-#        get_form_response(self.client)
-#        self.assertTrue('Contact form sent' in mail.outbox[0].subject)
+    def test_gets_subject_from_template(self):
+        get_form_response(self.client)
+        self.assertTrue('Contact form sent' in mail.outbox[0].subject)
 
-#    def test_gets_body_from_template(self):
-#        get_form_response(self.client)
-#        self.assertTrue('Name:' in mail.outbox[0].body)
+    def test_gets_body_from_template(self):
+        get_form_response(self.client)
+        self.assertTrue('Name:' in mail.outbox[0].body)
 
     def test_returns_submit_button_value_to_template(self):
         resp = self.client.get('/contact/')
         self.assertEqual(resp.context['form'].submit_button_value, 'Submit')
 
-#    def test_returns_empty_form_after_valid_submit(self):
-#        resp = get_form_response(self.client)
-#        self.assertEqual(resp.context['form'].data, {})
+    def test_returns_empty_form_after_valid_submit(self):
+        resp = get_form_response(self.client)
+        self.assertEqual(resp.context['form'].data, {})

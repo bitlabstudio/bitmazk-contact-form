@@ -10,6 +10,7 @@ if not settings.configured:
         DATABASE_ENGINE='sqlite3',
         ROOT_URLCONF='contact_form.tests.urls',
         MANAGERS=(('Foo Bar', 'foo@example.com'),),
+        ENABLE_CAPTCHA=False,
         INSTALLED_APPS=[
             'contact_form',
             'contact_form.tests',
