@@ -7,6 +7,9 @@ from django.core.mail import send_mail
 from django.template import loader, RequestContext
 from django.utils.translation import ugettext_lazy as _
 
+from captcha.fields import CaptchaField
+from django.shortcuts import render_to_response
+
 
 class ContactBaseForm(forms.Form):
     """Base class for contact forms."""
@@ -84,3 +87,18 @@ class ContactForm(ContactBaseForm):
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
         label=_('Message'),
         required=True)
+    captcha = CaptchaField()
+       
+
+def home(request):
+    if request.POST:
+        form = CaptchaTestForm(request.POST)
+
+        # Validate the form: the captcha field will automatically 
+        # check the input
+        if form.is_valid():
+            human = True
+    else:
+        form = CaptchaTestForm()
+
+    return render_to_response('base.html',locals())

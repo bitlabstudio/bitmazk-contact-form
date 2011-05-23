@@ -13,6 +13,7 @@ if not settings.configured:
         INSTALLED_APPS=[
             'contact_form',
             'contact_form.tests',
+            'captcha',
         ]
     )
 
