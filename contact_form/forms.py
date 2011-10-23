@@ -1,5 +1,4 @@
 """Forms for bitmazk-contact-form application."""
-
 from django import forms
 from django.conf import settings
 from django.contrib.sites.models import Site, RequestSite
@@ -8,7 +7,6 @@ from django.template import loader, RequestContext
 from django.utils.translation import ugettext_lazy as _
 
 from captcha.fields import CaptchaField
-from django.shortcuts import render_to_response
 
 
 class ContactBaseForm(forms.Form):
@@ -21,7 +19,8 @@ class ContactBaseForm(forms.Form):
         self.request = request
 
     from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = [mail_tuple[1] for mail_tuple in settings.MANAGERS]
+    recipient_list = [
+            mail_tuple[1] for mail_tuple in settings.CONTACT_FORM_RECEPIENTS]
     subject_template_name = 'contact_form/contact_form_subject.txt'
     template_name = 'contact_form/contact_form.txt'
     submit_button_value = _('Submit')
@@ -38,10 +37,10 @@ class ContactBaseForm(forms.Form):
     def subject(self):
         """Returns the email subject based on the subject template."""
         if callable(self.template_name):
-            template_name = self.template_name()
+            template_name = self.subject_template_name()
         else:
-            template_name = self.template_name
-        subject = loader.render_to_string(self.subject_template_name,
+            template_name = self.subject_template_name
+        subject = loader.render_to_string(template_name,
                                           self.get_context())
         return ''.join(subject.splitlines())
 
@@ -93,17 +92,3 @@ class ContactForm(ContactBaseForm):
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
         label=_('Message'),
         required=True)
-
-
-def home(request):
-    if request.POST:
-        form = CaptchaTestForm(request.POST)
-
-        # Validate the form: the captcha field will automatically
-        # check the input
-        if form.is_valid():
-            human = True
-    else:
-        form = CaptchaTestForm()
-
-    return render_to_response('base.html',locals())

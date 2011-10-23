@@ -37,6 +37,12 @@ Installation
         'contact_form',
     }
 
+* Add ``CONTACT_FORM_RECEPIENTS`` to your ``settings.py``::
+
+    CONTACT_FORM_RECEPIENTS = (
+        ('Foo Bar', 'foobar@example.com'),
+    )
+
 * Make sure to have a block called ``contact_form`` in your template::
 
   {% block contact_form %}

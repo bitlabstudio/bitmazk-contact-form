@@ -25,4 +25,3 @@ class ContactFormView(FormView):
 
     def get_form(self, form_class):
         return form_class(request=self.request, **self.get_form_kwargs())
-      
