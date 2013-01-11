@@ -16,6 +16,7 @@ class ContactBaseForm(forms.Form):
     recipients = [x[1] for x in settings.CONTACT_FORM_RECIPIENTS]
     subject_template = 'contact_form/contact_form_subject.txt'
     body_template = 'contact_form/contact_form.txt'
+    submit_button_value = _('Submit')
 
     def save(self):
         context = {}
