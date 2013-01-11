@@ -11,7 +11,7 @@ def read(fname):
 
 
 setup(
-    name="contact_form",
+    name="bitmazk-contact-form",
     version=contact_form.__version__,
     description=read('DESCRIPTION'),
     long_description=read('README.rst'),
