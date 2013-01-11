@@ -9,7 +9,7 @@ if not settings.configured:
     settings.configure(
         DATABASE_ENGINE='sqlite3',
         ROOT_URLCONF='contact_form.tests.urls',
-        CONTACT_FORM_RECEPIENTS=(('Foo Bar', 'foo@example.com'),),
+        CONTACT_FORM_RECIPIENTS=(('Foo Bar', 'foo@example.com'),),
         ENABLE_CAPTCHA=False,
         INSTALLED_APPS=[
             'contact_form',

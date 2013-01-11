@@ -20,7 +20,7 @@ class ContactBaseForm(forms.Form):
 
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [
-            mail_tuple[1] for mail_tuple in settings.CONTACT_FORM_RECEPIENTS]
+            mail_tuple[1] for mail_tuple in settings.CONTACT_FORM_RECIPIENTS]
     subject_template_name = 'contact_form/contact_form_subject.txt'
     template_name = 'contact_form/contact_form.txt'
     submit_button_value = _('Submit')
