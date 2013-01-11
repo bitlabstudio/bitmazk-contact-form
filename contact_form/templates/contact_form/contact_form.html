@@ -1,4 +1,9 @@
 {% extends "contact_form.html" %}
+
+{% block extracss %}
+{{ form.media.css }}
+{% endblock %}
+
 {% block contact_form %}
   {% if success %}
     {% include "contact_form/contact_form_success.html" %}

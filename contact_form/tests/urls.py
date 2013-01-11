@@ -1,6 +1,7 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import *  # NOQA
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^contact/', include('contact_form.urls')),
 )
