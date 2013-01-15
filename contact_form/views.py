@@ -11,4 +11,5 @@ class ContactFormView(FormView):
 
     def form_valid(self, form):
         form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+        return self.render_to_response(self.get_context_data(form=form,
+                                                             success=True))
