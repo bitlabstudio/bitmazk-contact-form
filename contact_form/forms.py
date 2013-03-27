@@ -7,8 +7,6 @@ from django.core.mail import send_mail
 from django.template import loader
 from django.utils.translation import ugettext_lazy as _
 
-from captcha.fields import CaptchaField
-
 
 class ContactBaseForm(forms.Form):
     """Base class for contact forms."""
@@ -32,18 +30,26 @@ class ContactBaseForm(forms.Form):
 class ContactForm(ContactBaseForm):
     """A typical contact form."""
     name = forms.CharField(
-        label=_('Name'), max_length=255, required=False)
+        label=_('Name'),
+        max_length=255,
+        required=False,
+    )
+
     email = forms.EmailField(
-        label=_('Email'), required=True)
+        label=_('Email'),
+    )
+
     message = forms.CharField(
         max_length=5000,
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
         label=_('Message'),
-        required=True)
+    )
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         if getattr(settings, 'ENABLE_CAPTCHA', False):
+            # Only import captcha app, if captchas are used
+            from captcha.fields import CaptchaField
             self.fields['captcha'] = CaptchaField()
 
 
