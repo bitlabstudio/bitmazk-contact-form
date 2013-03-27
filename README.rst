@@ -29,6 +29,10 @@ If you want to install the latest stable release from PyPi:
 
     $ pip install bitmazk-contact-form
 
+If you want to use captchas be sure to install::
+
+    $ pip install django-simple-captcha
+
 If you feel adventurous and want to install the latest commit from GitHub:
 
     $ pip install -e git://github.com/bitmazk/bitmazk-contact-form#egg=contact_form

@@ -3,15 +3,15 @@
 # ===========================================================================
 # Packages essential to this app. Needed by anyone who wants to use this app.
 # ===========================================================================
-django==1.4.3
-django-simple-captcha==0.3.4
+django==1.5
+django-simple-captcha==0.3.7
 
 
 # ==============================================================
 # Packages needed for running the tests. Needed by contributors.
 # ==============================================================
 django-nose==1.1
-coverage==3.5.3
+coverage==3.6
 django-coverage==1.2.2
-flake8
-ipdb
+flake8==2.0
+ipdb==0.7
