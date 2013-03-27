@@ -31,12 +31,6 @@ class ContactBaseForm(forms.Form):
 
 class ContactForm(ContactBaseForm):
     """A typical contact form."""
-
-    def __init__(self, *args, **kwargs):
-        super(ContactForm, self).__init__(*args, **kwargs)
-        if settings.ENABLE_CAPTCHA:
-            self.fields['captcha'] = CaptchaField()
-
     name = forms.CharField(
         label=_('Name'), max_length=255, required=False)
     email = forms.EmailField(
@@ -46,6 +40,11 @@ class ContactForm(ContactBaseForm):
         widget=forms.Textarea(attrs=dict(maxlength=5000)),
         label=_('Message'),
         required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        if getattr(settings, 'ENABLE_CAPTCHA', False):
+            self.fields['captcha'] = CaptchaField()
 
 
 class AntiSpamContactForm(ContactForm):

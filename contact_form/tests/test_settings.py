@@ -7,7 +7,6 @@ SITE_ID = 1
 CONTACT_FORM_RECIPIENTS = (
     ('Test', 'test@example.com'),
 )
-ENABLE_CAPTCHA = False
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
