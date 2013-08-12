@@ -25,6 +25,7 @@ class ContactBaseForm(forms.Form):
         body = loader.render_to_string(self.body_template, context,)
         send_mail(subject, body, self.from_email, self.recipients,
                   fail_silently=False)
+        self.data = {}
 
 
 class ContactForm(ContactBaseForm):
