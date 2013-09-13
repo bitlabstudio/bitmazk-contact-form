@@ -62,7 +62,15 @@ optional::
 * Create a CMS page, assign it to the template that has the ``contact_form``
 block and add the ``Contact Form AppHook`` to the page.
 
+
 Configuration
 =============
 
 Set ``ENABLE_CAPTCHA=True`` if you want to show an image captcha.
+
+
+Set ``CONTACT_FORM_DISPLAY_CATEGORIES=True`` if you want the form to include a
+list of categories the users request is about.
+
+The categories are stored as master data and you can add them via the Django
+admin under ``contact_form > ContactFormCategory``.
