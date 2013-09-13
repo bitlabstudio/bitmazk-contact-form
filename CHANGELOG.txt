@@ -1,5 +1,7 @@
 === (ongoing) ===
 
+=== 0.1 ===
+
 - Updated ContactForm to use the categories
 - Added CONTACT_FORM_DISPLAY_CATEGORIES setting
 - Added translatable ContactFormCategory model
