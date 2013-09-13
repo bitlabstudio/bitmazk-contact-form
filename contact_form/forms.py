@@ -7,6 +7,13 @@ from django.core.mail import send_mail
 from django.template import loader
 from django.utils.translation import ugettext_lazy as _
 
+from .models import ContactFormCategory
+
+
+def contact_form_category_choices():
+    return [(cat.slug, cat.name) for cat in
+            ContactFormCategory.objects.all()]
+
 
 class ContactBaseForm(forms.Form):
     """Base class for contact forms."""
@@ -52,6 +59,13 @@ class ContactForm(ContactBaseForm):
             # Only import captcha app, if captchas are used
             from captcha.fields import CaptchaField
             self.fields['captcha'] = CaptchaField()
+        if getattr(settings, 'CONTACT_FORM_DISPLAY_CATEGORIES', False):
+            # Only import captcha app, if captchas are used
+            self.fields['category'] = forms.ChoiceField(
+                choices=contact_form_category_choices(),
+                label=_('Category'),
+                help_text=_('Please tell us the subject of your request.'),
+            )
 
 
 class AntiSpamContactForm(ContactForm):
