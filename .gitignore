@@ -5,3 +5,4 @@ build/
 contact_form.egg-info/
 contact_form/tests/coverage/
 dist/
+db.sqlite
