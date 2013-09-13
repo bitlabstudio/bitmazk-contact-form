@@ -1,0 +1,11 @@
+=== (ongoing) ===
+
+- Updated ContactForm to use the categories
+- Added CONTACT_FORM_DISPLAY_CATEGORIES setting
+- Added translatable ContactFormCategory model
+- Added south
+- Added CHANGELOG
+- Added manage.py and test settings
+
+=== 0.0.6 ===
+- Created basic app with AntiSpamContactForm and AppHook
