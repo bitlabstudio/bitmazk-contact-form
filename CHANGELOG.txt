@@ -1,5 +1,7 @@
 === (ongoing) ===
 
+- added __init__.py to integration_tests folder
+
 === 0.1 ===
 
 - Updated ContactForm to use the categories
