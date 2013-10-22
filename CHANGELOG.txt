@@ -1,6 +1,7 @@
 === (ongoing) ===
 
 - added __init__.py to integration_tests folder
+- Clearing form after successful save
 
 === 0.1 ===
 
