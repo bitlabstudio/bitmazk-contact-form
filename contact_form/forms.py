@@ -29,9 +29,10 @@ class ContactBaseForm(forms.Form):
             context.update({info: self.cleaned_data.get(info)})
         subject = loader.render_to_string(self.subject_template, context)
         subject = ''.join(subject.splitlines())
-        body = loader.render_to_string(self.body_template, context,)
+        body = loader.render_to_string(self.body_template, context)
         send_mail(subject, body, self.from_email, self.recipients,
                   fail_silently=False)
+        # Empties the form
         self.data = {}
 
 

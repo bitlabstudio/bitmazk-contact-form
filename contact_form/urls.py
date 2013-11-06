@@ -7,5 +7,5 @@ from contact_form.views import ContactFormView
 
 urlpatterns = patterns(
     '',
-    url(r'^$', ContactFormView.as_view(), name='contact_form'),
+    url(r'^', ContactFormView.as_view(), name='contact_form'),
 )
