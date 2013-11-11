@@ -1,4 +1,7 @@
 === (ongoing) ===
+ 
+- Sending message on success. Set message via
+  settings.CONTACT_FORM_SUCCESS_MESSAGE
 
 === 0.1.1 ===
 
