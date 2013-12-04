@@ -1,5 +1,8 @@
 === (ongoing) ===
 
+
+== 0.2.1 ===
+
 - fixed factories
 
 === 0.2 ===
