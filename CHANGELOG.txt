@@ -1,5 +1,7 @@
 === (ongoing) ===
 
+- fixed factories
+
 === 0.2 ===
  
 - Sending message on success. Set message via

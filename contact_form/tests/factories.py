@@ -12,7 +12,8 @@ class ContactFormCategoryBaseFactory(factory.Factory):
     slug = factory.Sequence(lambda n: 'slug_{0}'.format(n))
 
 
-class ContactFormCategoryFactory(SimpleTranslationMixin, factory.Factory):
+class ContactFormCategoryFactory(SimpleTranslationMixin, 
+                                 ContactFormCategoryBaseFactory):
     """Factory for ``ContactFormCategory`` objects."""
 
     @staticmethod
