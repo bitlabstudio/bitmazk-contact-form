@@ -1,8 +1,14 @@
 === (ongoing) ===
 
-=== 0.2 ===
 
-- BACKWARDS INCOMPATIBLE: Moved from simpletranslation to hvad
+== 0.2.1 ===
+
+- fixed factories
+
+=== 0.2 ===
+ 
+- Sending message on success. Set message via
+  settings.CONTACT_FORM_SUCCESS_MESSAGE
 
 === 0.1.1 ===
 
