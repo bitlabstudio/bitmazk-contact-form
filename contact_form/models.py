@@ -2,10 +2,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django_libs.models_mixins import SimpleTranslationMixin
+from hvad.models import TranslatableModel, TranslatedFields
 
 
-class ContactFormCategory(SimpleTranslationMixin, models.Model):
+class ContactFormCategory(TranslatableModel):
     """
     The category of the users contact request.
 
@@ -18,24 +18,9 @@ class ContactFormCategory(SimpleTranslationMixin, models.Model):
         verbose_name=_('Slug'),
     )
 
-    def __unicode__(self):
-        return self.get_translation().name
-
-    @property
-    def name(self):
-        return self.get_translation().name
-
-
-class ContactFormCategoryTranslation(models.Model):
-    """Translatable fields of the ``ContactFormCategory`` model."""
-    name = models.CharField(
-        max_length=256,
-        verbose_name=_('Name'),
+    translations = TranslatedFields(
+        name=models.CharField(max_length=256),
     )
 
-    # needed by simple-translation
-    contact_form_category = models.ForeignKey(ContactFormCategory)
-    language = models.CharField(max_length=16)
-
     def __unicode__(self):
-        return '{0} ({1})'.format(self.name, self.language)
+        return self.lazy_translation_getter('name', 'Untranslated')

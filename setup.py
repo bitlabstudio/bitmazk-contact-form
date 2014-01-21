@@ -22,4 +22,8 @@ setup(
     url="https://github.com/bitmazk/bitmazk-contact-form",
     include_package_data=True,
     test_suite='contact_form.tests.runtests.runtests',
+    install_requires=[
+        'django',
+        'django-hvad>=0.3',
+    ],
 )
