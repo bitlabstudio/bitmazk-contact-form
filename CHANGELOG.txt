@@ -1,5 +1,7 @@
 === (ongoing) ===
 
+=== 0.2 ===
+
 - BACKWARDS INCOMPATIBLE: Moved from simpletranslation to hvad
 
 === 0.1.1 ===

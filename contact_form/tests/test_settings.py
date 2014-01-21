@@ -66,7 +66,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'simple_translation.middleware.MultilingualGenericsMiddleware'
 )
 
 CONTACT_FORM_RECIPIENTS = (
