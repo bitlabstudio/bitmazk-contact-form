@@ -57,6 +57,10 @@ Make sure to have a block called ``contact_form`` in your template::
 If the output does not fit your needs, just override the templates provided by
 this package.
 
+Add the relevant css sheet::
+
+    <link href="{% static "contact_form/css/contact_form.css" %}" type="text/css" media="all" rel="stylesheet" />
+
 optional::
 
 * Create a CMS page, assign it to the template that has the ``contact_form``
