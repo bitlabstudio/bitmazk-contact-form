@@ -1,4 +1,4 @@
 Name: {{ name }}
 Email: {{ email }}
-
-Message: {{ message }}
+--------------------------------------
+{{ message|safe|linebreaks|striptags }}
