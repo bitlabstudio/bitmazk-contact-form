@@ -19,8 +19,8 @@ class ContactBaseForm(forms.Form):
     """Base class for contact forms."""
     from_email = settings.DEFAULT_FROM_EMAIL
     recipients = [x[1] for x in settings.CONTACT_FORM_RECIPIENTS]
-    subject_template = 'contact_form/contact_form_subject.txt'
-    body_template = 'contact_form/contact_form.txt'
+    subject_template = 'contact_form/email/contact_form_subject.html'
+    body_template = 'contact_form/email/contact_form.html'
     submit_button_value = _('Submit')
 
     def save(self):

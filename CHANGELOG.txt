@@ -1,5 +1,8 @@
 === (ongoing) ===
 
+=== 0.3.2 ===
+
+- Moved email templates
 
 === 0.3.1 ===
 
