@@ -23,7 +23,8 @@ setup(
     include_package_data=True,
     test_suite='contact_form.tests.runtests.runtests',
     install_requires=[
-        'django',
-        'django-hvad>=0.3',
+        'django>=1.7',
+        'django-hvad>=1.0',
+        'django-libs>=1.66.9',
     ],
 )

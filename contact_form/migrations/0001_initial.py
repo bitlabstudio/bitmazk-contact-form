@@ -1,52 +1,43 @@
 # flake8: noqa
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'ContactFormCategory'
-        db.create_table(u'contact_form_contactformcategory', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=256)),
-        ))
-        db.send_create_signal(u'contact_form', ['ContactFormCategory'])
+    dependencies = [
+    ]
 
-        # Adding model 'ContactFormCategoryTranslation'
-        db.create_table(u'contact_form_contactformcategorytranslation', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=256)),
-            ('contact_form_category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contact_form.ContactFormCategory'])),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=16)),
-        ))
-        db.send_create_signal(u'contact_form', ['ContactFormCategoryTranslation'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'ContactFormCategory'
-        db.delete_table(u'contact_form_contactformcategory')
-
-        # Deleting model 'ContactFormCategoryTranslation'
-        db.delete_table(u'contact_form_contactformcategorytranslation')
-
-
-    models = {
-        u'contact_form.contactformcategory': {
-            'Meta': {'object_name': 'ContactFormCategory'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '256'})
-        },
-        u'contact_form.contactformcategorytranslation': {
-            'Meta': {'object_name': 'ContactFormCategoryTranslation'},
-            'contact_form_category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contact_form.ContactFormCategory']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '16'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '256'})
-        }
-    }
-
-    complete_apps = ['contact_form']
+    operations = [
+        migrations.CreateModel(
+            name='ContactFormCategory',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('slug', models.SlugField(max_length=256, verbose_name='Slug')),
+            ],
+            options={
+                'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='ContactFormCategoryTranslation',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=256)),
+                ('language_code', models.CharField(max_length=15, db_index=True)),
+                ('master', models.ForeignKey(related_name='translations', editable=False, to='contact_form.ContactFormCategory', null=True)),
+            ],
+            options={
+                'managed': True,
+                'abstract': False,
+                'db_table': 'contact_form_contactformcategory_translation',
+                'db_tablespace': '',
+            },
+        ),
+        migrations.AlterUniqueTogether(
+            name='contactformcategorytranslation',
+            unique_together=set([('language_code', 'master')]),
+        ),
+    ]

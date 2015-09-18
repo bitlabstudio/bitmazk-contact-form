@@ -1,5 +1,4 @@
 """URLs for bitmazk-contact-form application."""
-
 from django.conf.urls import patterns, url
 
 from contact_form.views import ContactFormView

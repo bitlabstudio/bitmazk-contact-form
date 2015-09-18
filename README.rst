@@ -1,8 +1,8 @@
 bitmazk-contact-form
 ====================
 
-A reusable contact form app for Django. Can be used via CAPTCHA and/or via
-modern user-friendly spam protection. Ready for multilingual sites.
+A reusable contact form app for Django. Can be used with a modern user-friendly
+spam protection. Ready for multilingual sites.
 
 At the moment this contact form does not redirect to a success page. Instead
 it adds a variable ``success`` to the template context. The developer can then
@@ -28,10 +28,6 @@ Installation
 If you want to install the latest stable release from PyPi:
 
     $ pip install bitmazk-contact-form
-
-If you want to use captchas be sure to install::
-
-    $ pip install django-simple-captcha
 
 If you feel adventurous and want to install the latest commit from GitHub:
 
@@ -69,9 +65,6 @@ block and add the ``Contact Form AppHook`` to the page.
 
 Configuration
 =============
-
-Set ``ENABLE_CAPTCHA=True`` if you want to show an image captcha.
-
 
 Set ``CONTACT_FORM_DISPLAY_CATEGORIES=True`` if you want the form to include a
 list of categories the users request is about.

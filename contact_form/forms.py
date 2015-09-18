@@ -3,9 +3,9 @@ import os
 
 from django import forms
 from django.conf import settings
-from django.core.mail import send_mail
-from django.template import loader
 from django.utils.translation import ugettext_lazy as _
+
+from django_libs.utils_email import send_email
 
 from .models import ContactFormCategory
 
@@ -27,11 +27,16 @@ class ContactBaseForm(forms.Form):
         context = {}
         for info in self.cleaned_data:
             context.update({info: self.cleaned_data.get(info)})
-        subject = loader.render_to_string(self.subject_template, context)
-        subject = ''.join(subject.splitlines())
-        body = loader.render_to_string(self.body_template, context)
-        send_mail(subject, body, self.from_email, self.recipients,
-                  fail_silently=False)
+        send_email(
+            None,
+            context,
+            self.subject_template,
+            self.body_template,
+            self.from_email,
+            self.recipients,
+            priority="medium",
+            reply_to=self.cleaned_data.get('email', ''),
+        )
         # Empties the form
         self.data = {}
 
@@ -56,12 +61,7 @@ class ContactForm(ContactBaseForm):
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        if getattr(settings, 'ENABLE_CAPTCHA', False):
-            # Only import captcha app, if captchas are used
-            from captcha.fields import CaptchaField
-            self.fields['captcha'] = CaptchaField()
         if getattr(settings, 'CONTACT_FORM_DISPLAY_CATEGORIES', False):
-            # Only import captcha app, if captchas are used
             self.fields['category'] = forms.ChoiceField(
                 choices=contact_form_category_choices(),
                 label=_('Category'),

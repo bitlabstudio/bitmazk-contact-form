@@ -1,5 +1,9 @@
 === (ongoing) ===
 
+- Used sender email as 'reply to' address
+- Removed simple captcha
+- Prepared app for Django 1.8
+
 === 0.3.2 ===
 
 - Moved email templates

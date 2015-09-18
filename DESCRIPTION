@@ -1,2 +1,2 @@
-A reusable contact form app for Django. Can be used via CAPTCHA and/or via
-modern user-friendly spam protection.
+A reusable contact form app for Django. Can be used with a modern user-friendly
+spam protection.
