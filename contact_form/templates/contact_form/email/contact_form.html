@@ -1,4 +1,4 @@
-Name: {{ name }}
-Email: {{ email }}
---------------------------------------
-{{ message|safe|linebreaks|striptags }}
+<p>Name: {{ name }}</p>
+<p>Email: {{ email }}</p>
+<hr />
+<blockquote>{{ message|safe|linebreaks|striptags }}</blockquote>
