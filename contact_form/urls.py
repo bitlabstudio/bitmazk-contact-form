@@ -1,10 +1,9 @@
 """URLs for bitmazk-contact-form application."""
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from contact_form.views import ContactFormView
+from .views import ContactFormView
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^', ContactFormView.as_view(), name='contact_form'),
-)
+]

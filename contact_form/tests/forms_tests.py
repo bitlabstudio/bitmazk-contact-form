@@ -2,7 +2,9 @@
 from django.core import mail
 from django.test import TestCase
 
-from contact_form.forms import AntiSpamContactForm
+from mixer.backend.django import mixer
+
+from ..forms import AntiSpamContactForm
 
 
 class AntiSpamContactFormTestCase(TestCase):
@@ -10,15 +12,18 @@ class AntiSpamContactFormTestCase(TestCase):
     longMessage = True
 
     def test_form(self):
+        category = mixer.blend('contact_form.ContactFormCategoryTranslation',
+                               language_code='en').master
         # The url field is hidden. Only spammers would enter data here.
         # The form should be valid, but send no mail.
         data = {
             'email': 'test@example.com',
             'message': 'Foo',
             'url': 'http://www.example.com',
+            'category': category.pk,
         }
         form = AntiSpamContactForm(data=data)
-        self.assertTrue(form.is_valid())
+        self.assertFalse(form.errors)
         form.save()
         self.assertEqual(len(mail.outbox), 0)
 

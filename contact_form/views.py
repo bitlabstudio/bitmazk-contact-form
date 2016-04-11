@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
-from contact_form.forms import AntiSpamContactForm
+from .forms import AntiSpamContactForm
 
 
 class ContactFormView(FormView):

@@ -1,8 +1,11 @@
+*.coverage
 *.egg-info/
 *.pyc
-*.wpr
-build/
-contact_form.egg-info/
-contact_form/tests/coverage/
-dist/
+*coverage/
+.tox/
+app_media/
+app_static/
 db.sqlite
+dist/
+docs/_build/
+local_settings.py

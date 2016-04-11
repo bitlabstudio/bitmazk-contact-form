@@ -3,16 +3,11 @@ import os
 
 from django import forms
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language, ugettext_lazy as _
 
 from django_libs.utils_email import send_email
 
 from .models import ContactFormCategory
-
-
-def contact_form_category_choices():
-    return [(cat.slug, cat.name) for cat in
-            ContactFormCategory.objects.all()]
 
 
 class ContactBaseForm(forms.Form):
@@ -62,8 +57,8 @@ class ContactForm(ContactBaseForm):
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         if getattr(settings, 'CONTACT_FORM_DISPLAY_CATEGORIES', False):
-            self.fields['category'] = forms.ChoiceField(
-                choices=contact_form_category_choices(),
+            self.fields['category'] = forms.ModelChoiceField(
+                queryset=ContactFormCategory.objects.language(get_language()),
                 label=_('Category'),
                 help_text=_('Please tell us the subject of your request.'),
             )
