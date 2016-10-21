@@ -1,6 +1,11 @@
 === (ongoing) ===
 
 
+=== 1.2 ===
+
+- Fixed typo in success message
+
+
 === 1.1 ===
 
 - Used sender email as 'reply to' address
