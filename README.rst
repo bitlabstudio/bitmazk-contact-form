@@ -5,8 +5,8 @@ A reusable contact form app for Django. Can be used with a modern user-friendly
 spam protection. Ready for multilingual sites.
 
 At the moment this contact form does not redirect to a success page. Instead
-it adds a variable ``success`` to the template context. The developer can then
-just output some success message next to the form.
+it adds a variable ``contact_form_success`` to the template context. The
+developer can then just output some success message next to the form.
 
 The project can be used in conjunction with `django-cms
 <https://github.com/divio/django-cms>`_. Therefore the package comes with a

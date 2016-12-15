@@ -18,5 +18,5 @@ class ContactFormView(FormView):
             'Your request has been successfully submitted. We will get back'
             ' to you as soon as possible.'))
         messages.add_message(self.request, messages.SUCCESS, success_message)
-        return self.render_to_response(self.get_context_data(form=form,
-                                                             success=True))
+        return self.render_to_response(self.get_context_data(
+            form=form, contact_form_success=True))

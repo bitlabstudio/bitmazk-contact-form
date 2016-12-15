@@ -1,5 +1,6 @@
 === (ongoing) ===
 
+- Changed success variable to avoid conflicts
 
 === 1.2 ===
 

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contact_form %}
-    {% if success %}
+    {% if contact_form_success %}
         {% include "contact_form/contact_form_success.html" %}
     {% endif %}
     <form method="post">
