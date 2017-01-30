@@ -4,13 +4,17 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 
-from .forms import AntiSpamContactForm
+from .forms import AntiSpamContactForm, ReCAPTCHAContactForm
 
 
 class ContactFormView(FormView):
     """View class for the ``contact_form.ContactForm`` Form."""
-    form_class = AntiSpamContactForm
     template_name = 'contact_form/contact_form.html'
+
+    def get_form_class(self):
+        if getattr(settings, 'CONTACT_FORM_RECAPTCHA', False):
+            return ReCAPTCHAContactForm
+        return AntiSpamContactForm
 
     def form_valid(self, form):
         form.save()

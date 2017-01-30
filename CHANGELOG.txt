@@ -1,5 +1,7 @@
 === (ongoing) ===
 
+- added reCAPTCHA
+
 === 1.2.1 ===
 
 - Changed success variable to avoid conflicts

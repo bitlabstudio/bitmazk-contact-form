@@ -67,8 +67,8 @@ EXTERNAL_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
-    'django_nose',
     'hvad',
+    # 'captcha',
 ]
 
 INTERNAL_APPS = [
@@ -93,3 +93,8 @@ CONTACT_FORM_RECIPIENTS = (
     ('Test Contact', 'test@example.com'),
 )
 CONTACT_FORM_DISPLAY_CATEGORIES = True
+CONTACT_FORM_RECAPTCHA = False
+RECAPTCHA_PUBLIC_KEY = 'YOUR_GOOGLE_RECAPTCHA_PUBLIC_KEY'
+RECAPTCHA_PRIVATE_KEY = 'YOUR_GOOGLE_RECAPTCHA_PRIVATE_KEY'
+NOCAPTCHA = True
+RECAPTCHA_USE_SSL = True

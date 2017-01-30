@@ -11,6 +11,6 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="{{ form.submit_button_value }}">
+        <input type="submit" value="{{ form.submit_button_value }}" {% if form.captcha %}id="recaptcha-submit" disabled{% endif %}>
     </form>
 {% endblock %}

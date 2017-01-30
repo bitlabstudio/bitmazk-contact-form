@@ -25,3 +25,7 @@ class ContactFormViewTestCase(ViewRequestFactoryTestMixin, TestCase):
         }
         self.is_postable(data=data, ajax=True)
         self.assertEqual(len(mail.outbox), 1)
+
+        # Test reCAPTCHA
+        with self.settings(CONTACT_FORM_RECAPTCHA=True):
+            self.is_callable()

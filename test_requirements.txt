@@ -1,6 +1,7 @@
 # ==============================================================
 # Packages needed for running the tests. Needed by contributors.
 # ==============================================================
+django-recaptcha==1.2.1
 coverage==4.0.3
 django-coverage==1.2.4
 flake8==2.5.4
