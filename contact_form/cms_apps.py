@@ -7,7 +7,9 @@ from cms.apphook_pool import apphook_pool
 
 class ContactFormApphook(CMSApp):
     name = _("Contact Form Apphook")
-    urls = ["contact_form.urls"]
+
+    def get_urls(self, page=None, language=None, **kwargs):
+        return ["contact_form.urls"]
 
 
 apphook_pool.register(ContactFormApphook)

@@ -3,6 +3,6 @@
 # ===========================================================================
 # Packages essential to this app. Needed by anyone who wants to use this app.
 # ===========================================================================
-Django==1.9.5
-django-hvad==1.5.0
+Django==1.10.7
+django-hvad==1.8.0
 django-libs==1.66.15
