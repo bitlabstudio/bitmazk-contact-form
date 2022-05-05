@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=256)),
                 ('language_code', models.CharField(max_length=15, db_index=True)),
-                ('master', models.ForeignKey(related_name='translations', editable=False, to='contact_form.ContactFormCategory', null=True)),
+                ('master', models.ForeignKey(related_name='translations', editable=False, to='contact_form.ContactFormCategory', null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'managed': True,

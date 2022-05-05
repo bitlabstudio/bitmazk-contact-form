@@ -41,6 +41,7 @@ TEMPLATES = [{
     'DIRS': [os.path.join(APP_ROOT, 'tests/test_app/templates')],
     'OPTIONS': {
         'context_processors': (
+            'django.contrib.messages.context_processors.messages',
             'django.contrib.auth.context_processors.auth',
             'django.template.context_processors.i18n',
             'django.template.context_processors.request',
@@ -80,7 +81,7 @@ COVERAGE_MODULE_EXCLUDES += EXTERNAL_APPS
 
 SECRET_KEY = 'foobar'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

@@ -1,12 +1,10 @@
 """Models for the ``contact_form`` app."""
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from hvad.models import TranslatableModel, TranslatedFields
+from parler.models import TranslatableModel, TranslatedFields
 
 
-@python_2_unicode_compatible
 class ContactFormCategory(TranslatableModel):
     """
     The category of the users contact request.
@@ -25,4 +23,4 @@ class ContactFormCategory(TranslatableModel):
     )
 
     def __str__(self):
-        return self.lazy_translation_getter('name', 'Untranslated')
+        return self.safe_translation_getter('name', 'Untranslated')

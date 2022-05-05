@@ -18,13 +18,13 @@ setup(
     keywords='contact form django reusable',
     packages=find_packages(),
     author='Tobias Lorenz',
-    author_email='tobias.lorenz@bitmazk.com',
-    url="https://github.com/bitmazk/bitmazk-contact-form",
+    author_email='tobias.lorenz@bitlabstudio.com',
+    url="https://github.com/bitlabstudio/bitmazk-contact-form",
     include_package_data=True,
     test_suite='contact_form.tests.runtests.runtests',
     install_requires=[
-        'django>=1.7',
-        'django-hvad>=1.0',
-        'django-libs>=1.66.9',
+        'django>=2',
+        'django-parler>=2.3',
+        'django-libs>=2.0.3',
     ],
 )
