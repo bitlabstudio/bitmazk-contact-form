@@ -68,7 +68,7 @@ EXTERNAL_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
-    'hvad',
+    'parler',
     # 'captcha',
 ]
 
